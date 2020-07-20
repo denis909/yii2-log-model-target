@@ -36,6 +36,18 @@ class LogModelTarget extends \yii\log\Target
                 'message' => $text
             ]);
 
+            if (is_array($text))
+            {
+                foreach($text as $key => $value)
+                {
+                    $model->$key = $value;
+                }
+            }
+            else
+            {
+                $model->message = $text;
+            }
+
             if (!$model->save())
             {
                 throw new ModelException($model);
