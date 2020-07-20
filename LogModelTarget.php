@@ -12,6 +12,8 @@ class LogModelTarget extends \yii\log\Target
 
     public $modelClass;
 
+    public $db = 'db';
+
     public function export()
     {
         Assert::notEmpty($this->modelClass, get_called_class() . '::modelClass is empty.');
@@ -20,21 +22,25 @@ class LogModelTarget extends \yii\log\Target
         {
             list($text, $level, $category, $timestamp) = $message;
             
-            if (!is_string($text))
+            if ($text instanceof Throwable || $text instanceof Exception)
             {
-                if ($text instanceof Throwable || $text instanceof Exception)
-                {
-                    $text = (string) $text;
-                }
+                $text = (string) $text;
             }
 
             $model = Yii::createObject([
+                'class' => $this->modelClass,
                 'level' => $level,
                 'category' => $category,
                 'log_time' => $timestamp,
-                'prefix' => $this->getMessagePrefix($message),
-                'message' => $text
+                'prefix' => $this->getMessagePrefix($message)
             ]);
+
+            if ($model->db->getTransaction())
+            {
+                // create new database connection, if there is an open transaction
+                // to ensure insert statement is not affected by a rollback
+                $model->db = clone $model->db;
+            }
 
             if (is_array($text))
             {
