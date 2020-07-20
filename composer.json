@@ -1,0 +1,13 @@
+{
+    "name": "denis909/yii2-log-model-target",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "denis909\\yii\\" : ""
+        }
+    },
+    "require": {
+        "denis909/yii2-assert" : "*",
+        "denis909/yii2-model-exception": "*"
+    }
+}
