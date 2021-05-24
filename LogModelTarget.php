@@ -35,13 +35,6 @@ class LogModelTarget extends \yii\log\Target
                 'prefix' => $this->getMessagePrefix($message)
             ]);
 
-            if ($model->db->getTransaction())
-            {
-                // create new database connection, if there is an open transaction
-                // to ensure insert statement is not affected by a rollback
-                $model->db = clone $model->db;
-            }
-
             if (is_array($text))
             {
                 foreach($text as $key => $value)
