@@ -17,16 +17,4 @@ abstract class BaseLogModel extends ActiveRecord
         $this->context_json = JSON::encode($array);
     }
 
-    public function getMessage() : string
-    {
-        return strtr($this->message, $this->context);
-    }
-
-    public function getCreated()
-    {
-        $time_segments = explode('.', $this->log_time);
-
-        return date('Y-m-d H:i:s', $time_segments[0]);
-    }
-
 }
