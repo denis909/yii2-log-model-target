@@ -9,6 +9,6 @@
     "require": {
         "webmozart/assert": "*",
         "denis909/yii2-migration": "*",
-        "denis909/yii2-active-record": "*",
+        "denis909/yii2-active-record": "*"
     }
 }
