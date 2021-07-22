@@ -34,9 +34,23 @@ class LogModelTarget extends \yii\log\Target
 
             if (is_array($text))
             {
-                foreach($text as $key => $value)
+                $context = $text;
+
+                foreach($context as $key => $value)
                 {
+                    if (!$model->hasAttribute($key))
+                    {
+                        continue;
+                    }
+
                     $model->$key = $value;
+                
+                    unset($context[$key]);
+                }
+
+                if ($model->hasAttribute('context') || $model->hasProperty('context'))
+                {
+                    $model->context = $context;
                 }
             }
             else

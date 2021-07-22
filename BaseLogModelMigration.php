@@ -25,7 +25,8 @@ abstract class BaseLogModelMigration extends Migration
             'category' => $this->string(),
             'log_time' => $this->double(),
             'prefix' => $this->text(),
-            'message' => $this->text(65535)->defaultValue(null)
+            'message' => $this->text(65535)->defaultValue(null),
+            'context_json' => $this->text(65535)->defaultValue(null)
         ], $this->getTableColumns());
 
         $this->createTable($this->tableName, $columns);
