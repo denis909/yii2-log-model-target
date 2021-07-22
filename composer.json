@@ -7,7 +7,8 @@
         }
     },
     "require": {
-        "denis909/yii2-assert" : "*",
-        "denis909/yii2-model-exception": "*"
+        "webmozart/assert": "*",
+        "denis909/yii2-migration": "*",
+        "denis909/yii2-active-record": "*",
     }
 }

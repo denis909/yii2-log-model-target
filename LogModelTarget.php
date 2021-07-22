@@ -5,14 +5,11 @@ namespace denis909\yii;
 use Yii;
 use Exception;
 use Throwable;
-use denis909\yii\ModelException;
 
 class LogModelTarget extends \yii\log\Target
 {
 
     public $modelClass;
-
-    public $db = 'db';
 
     public function export()
     {
@@ -47,10 +44,7 @@ class LogModelTarget extends \yii\log\Target
                 $model->message = $text;
             }
 
-            if (!$model->save())
-            {
-                throw new ModelException($model);
-            }
+            $model->saveOrFail();
         }
     }
 
